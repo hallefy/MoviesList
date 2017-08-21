@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FilmsKotlin</string>
+    <string name="textview">TextView</string>
+    <string name="btn_ok">Ok</string>
+</resources>
