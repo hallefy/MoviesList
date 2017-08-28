@@ -1,7 +1,10 @@
 package com.example.hallefy.filmskotlin.NetworkAPI
 
+import com.example.hallefy.filmskotlin.NetworkAPI.models.Movie
 import com.example.hallefy.filmskotlin.NetworkAPI.models.MoviesResponse
-import com.example.hallefy.filmskotlin.NetworkAPI.models.Response
+import io.reactivex.Observable
+import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**
@@ -17,6 +20,10 @@ interface ApiService{
                   @Query("page") page: String) : io.reactivex.Observable<MoviesResponse>
 
 
+    @GET("movie/{id}")
+    fun getMovieDetail(@Path("id") id : Int,@Query("api_key") apiKey: String ,@Query("language") language : String) : Observable<Movie>
+
+
     companion object Factory {
         fun create(): ApiService {
             val retrofit = retrofit2.Retrofit.Builder()
@@ -25,7 +32,7 @@ interface ApiService{
                     .baseUrl("http://api.themoviedb.org/3/")
                     .build()
 
-            return retrofit.create(ApiService::class.java);
+            return retrofit.create(ApiService::class.java)
         }
     }
 

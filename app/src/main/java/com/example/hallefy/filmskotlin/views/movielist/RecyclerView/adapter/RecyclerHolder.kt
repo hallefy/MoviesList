@@ -1,6 +1,8 @@
 package com.example.hallefy.filmskotlin.views.movielist.RecyclerView.adapter
 
 import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
@@ -9,6 +11,7 @@ import android.widget.TextView
 import com.example.hallefy.filmskotlin.NetworkAPI.models.MoviesResponse
 
 import com.example.hallefy.filmskotlin.R
+import com.example.hallefy.filmskotlin.views.moviedetail.ActivityDetalhes
 import com.example.hallefy.filmskotlin.views.movielist.utils.loadUrl
 
 /**
@@ -16,7 +19,7 @@ import com.example.hallefy.filmskotlin.views.movielist.utils.loadUrl
  */
 
 
-class newHolder(view: View, internal var context: Context,val response: MoviesResponse) : RecyclerView.ViewHolder(view) {
+class RecyclerHolder(view: View, internal var context: Context, val response: MoviesResponse) : RecyclerView.ViewHolder(view) {
 
     var title: TextView
     var rate: TextView
@@ -24,6 +27,7 @@ class newHolder(view: View, internal var context: Context,val response: MoviesRe
     var imageFilm: ImageView
     var relativeLayout: LinearLayout
 
+    var bundle : Bundle? = Bundle()
 
 
     fun bind(films: MoviesResponse, position : Int){
@@ -43,7 +47,12 @@ class newHolder(view: View, internal var context: Context,val response: MoviesRe
 
         relativeLayout.setOnClickListener {
             val id = relativeLayout.id
-            println("id_movie" +  id)
+
+            val intent = Intent(context!!,ActivityDetalhes::class.java)
+            bundle!!.putInt("id_movie",id)
+            intent!!.putExtras(bundle)
+            context.startActivity(intent)
+
         }
 
     }

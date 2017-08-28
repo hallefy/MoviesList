@@ -8,20 +8,6 @@ import java.util.ArrayList
  */
 
 
-data class Films(
-
-        @SerializedName("title")
-        val title : String? = null,
-
-        @SerializedName("overview")
-        val description : String? = null,
-
-        @SerializedName("vote_average")
-        val rate : String? = null,
-
-        @SerializedName("backdrop_path")
-        val thumbnail : String? = null
-)
 
 class Movie(@SerializedName("poster_path")
             var posterPath: String?, @SerializedName("adult")
@@ -47,19 +33,6 @@ class Movie(@SerializedName("poster_path")
         }
 }
 
-class Response {
-        @SerializedName("page")
-        var page: Int = 0
-        @SerializedName("results")
-        var results: List<Movie>? = null
-        @SerializedName("total_results")
-        var totalResults: Int = 0
-        @SerializedName("total_pages")
-        var totalPages: Int = 0
-
-        data class Result(val total_count: Int, val items: List<Movie>)
-
-}
 
 
 data class MoviesResponse (

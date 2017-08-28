@@ -39,10 +39,15 @@ class FilmsPresenter @Inject constructor(private val recyclerView: RecyclerView,
 
             if(page_num <= 2){
 
-                adapter.setValuesAdapter(response.movies,response)
 
+
+                adapter.setValuesAdapter(response.movies,response)
+                adapter.setRecyclerViewListener(recyclerView)
                 adapter.setLoaded()
+
                 recyclerView.adapter = adapter
+
+                //evento do scroll do recyclerView
                 loadMoreList()
 
             }else{

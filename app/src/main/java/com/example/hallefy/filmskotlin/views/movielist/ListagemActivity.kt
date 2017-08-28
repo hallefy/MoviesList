@@ -13,25 +13,21 @@ import com.example.hallefy.filmskotlin.NetworkAPI.models.Movie
 import com.example.hallefy.filmskotlin.R
 import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.FilmsMVP
 import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.FilmsPresenter
-import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.adapter.MyRecyclerAdapter
+import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.injection.DaggerMoviesComponent
+import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.injection.MoviesComponent
+import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.injection.MoviesModule
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
 class ListagemActivity : AppCompatActivity(), FilmsMVP.View {
 
-
-    override fun showMoreFilms(movies: List<Movie>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun getMoviesRecyclerView(): RecyclerView {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    @Inject lateinit var mFilmsPresenter : FilmsPresenter
+    private var moviesComponent : MoviesComponent? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val adapter : MyRecyclerAdapter = MyRecyclerAdapter(this)
         recycler_view.apply {
             setHasFixedSize(true)
             val linearLayout = GridLayoutManager(context, 2)
@@ -39,7 +35,17 @@ class ListagemActivity : AppCompatActivity(), FilmsMVP.View {
             recycler_view.addItemDecoration(SpacesItemDecoration(resources.getDimensionPixelSize(R.dimen.default_padding)))
         }
 
-        var presenter = FilmsPresenter(recycler_view, adapter)
+        moviesComponent = DaggerMoviesComponent
+                .builder()
+                .moviesModule(MoviesModule(this,this,recycler_view))
+                .build()
+
+
+        moviesComponent!!.inject(this)
+
+
+
+        var presenter = FilmsPresenter(recycler_view, moviesComponent!!.provideAdapterMovies())
 
         if(verifyConnection()){
             //se possui internet
@@ -56,6 +62,20 @@ class ListagemActivity : AppCompatActivity(), FilmsMVP.View {
     }
 
 
+    override fun showMoreFilms() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun hideDialog(){
+        if(progressBar!!.isShown){
+            progressBar?.visibility = View.GONE
+        }
+    }
+
+
+    override fun getMoviesRecyclerView(): RecyclerView {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     private fun requestMovies(){
 

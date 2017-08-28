@@ -37,7 +37,7 @@ class MyRecyclerAdapter(private val mContext: Context) : RecyclerView.Adapter<Re
         if(viewType == VIEW_MOVIE){
             val v = LayoutInflater.from(viewGroup.context).inflate(R.layout.list_row_films, viewGroup,false)
 
-            return newHolder(v, mContext, response!!)
+            return RecyclerHolder(v, mContext, response!!)
         }else if (viewType == VIEW_LOADING){
             val v = LayoutInflater.from(viewGroup.context).inflate(R.layout.activity_main, viewGroup, false)
             val progressBar = v.findViewById(R.id.progressBar) as ProgressBar
@@ -65,7 +65,7 @@ class MyRecyclerAdapter(private val mContext: Context) : RecyclerView.Adapter<Re
 
 
         if(holder.itemViewType == VIEW_MOVIE){
-            val holderMovies = holder as newHolder
+            val holderMovies = holder as RecyclerHolder
             holderMovies.bind(response!!, i)
         } else if (holder.itemViewType == VIEW_LOADING) {
             val holderLoading = holder as LoadingViewHolder
