@@ -36,6 +36,10 @@ class RecyclerHolder(view: View, internal var context: Context, val response: Mo
         descricao.text = films.movies!![position]!!.originalTitle.toString()
         imageFilm.loadUrl("https://image.tmdb.org/t/p/w500/"+films.movies!![position]!!.posterPath)
         relativeLayout.id = films.movies!![position]!!.id!!
+
+        println("title: " + title.text + "rate: " + rate.text + "desc: " + descricao.text + "img: " + films.movies!![position]!!.posterPath
+                + "id: " + relativeLayout.id)
+
     }
 
     init {
