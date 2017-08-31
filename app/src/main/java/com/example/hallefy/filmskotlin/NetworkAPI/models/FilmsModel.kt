@@ -13,7 +13,6 @@ class Movie(@SerializedName("poster_path")
             var overview: String?,
             @SerializedName("release_date")
             var releaseDate: String?,
-            genreIds: List<Int>,
             @SerializedName("id")
             var id: Int?,
             @SerializedName("original_title")
@@ -23,14 +22,7 @@ class Movie(@SerializedName("poster_path")
             @SerializedName("backdrop_path")
             var backdropPath: String?,
             @SerializedName("vote_average")
-            var voteAverage: Double?) {
-        @SerializedName("genre_ids")
-        var genreIds: List<Int> = ArrayList()
-
-        init {
-                this.genreIds = genreIds
-        }
-}
+            var voteAverage: Double?)
 
 
 

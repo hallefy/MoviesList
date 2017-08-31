@@ -1,6 +1,7 @@
 package com.example.hallefy.filmskotlin.views.movielist.movielist
 
 import android.content.Context
+import android.content.DialogInterface
 import android.graphics.Rect
 import android.net.ConnectivityManager
 import android.os.Bundle
@@ -39,39 +40,36 @@ class ListagemActivity : AppCompatActivity(), FilmsMVP.View {
                 .builder()
                 .moviesModule(MoviesModule(this,this,recycler_view))
                 .build()
-
-
         moviesComponent!!.inject(this)
 
-
-
-        var presenter = FilmsPresenter(recycler_view, moviesComponent!!.provideAdapterMovies())
+        var presenter = FilmsPresenter(recycler_view, moviesComponent!!.provideAdapterMovies(),this)
 
         if(verifyConnection()){
-            //se possui internet
+            //if internet connection is ok
             presenter.requestFilms()
-
         }else{
-            //nao possui internet
-            AlertDialog.Builder(this).setTitle("Sem conexão com a internet")
-                    .setMessage("Por favor checar sua conexão e tentar novamente!")
-                    .setNeutralButton(R.string.btn_ok, null)
-                    .setIcon(android.R.drawable.ic_dialog_alert).show()
+            //if not have internet connection
+            showErrorConnection()
         }
-
     }
 
+    override fun showErrorConnection() {
+        AlertDialog.Builder(this).setTitle("Sem conexão com a internet")
+                .setMessage("Por favor checar sua conexão e tentar novamente!")
+                .setNeutralButton(R.string.btn_ok, DialogInterface.OnClickListener { dialog, which -> this.finish() })
+                .setIcon(android.R.drawable.ic_dialog_alert).show()
+
+    }
 
     override fun showMoreFilms() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun hideDialog(){
+    override fun hideDialog() {
         if(progressBar!!.isShown){
             progressBar?.visibility = View.GONE
         }
     }
-
 
     override fun getMoviesRecyclerView(): RecyclerView {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -104,6 +102,4 @@ class ListagemActivity : AppCompatActivity(), FilmsMVP.View {
             val networkInfo = connectivityManager.activeNetworkInfo // 2
             return networkInfo != null && networkInfo.isConnected // 3
     }
-
-
 }

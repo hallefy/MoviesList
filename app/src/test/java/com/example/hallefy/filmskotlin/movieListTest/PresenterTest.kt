@@ -1,4 +1,4 @@
-package com.example.hallefy.filmskotlin
+package com.example.hallefy.filmskotlin.movieListTest
 
 import android.app.Activity
 import android.support.v7.widget.RecyclerView
@@ -8,7 +8,6 @@ import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.FilmsMVP
 import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.FilmsPresenter
 import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.adapter.MyRecyclerAdapter
 import com.nhaarman.mockito_kotlin.mock
-import net.bytebuddy.implementation.bytecode.Throw
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
@@ -21,7 +20,7 @@ import java.util.ArrayList
  */
 
 @RunWith(MockitoJUnitRunner::class)
-class Test {
+class PresenterTest {
 
     var recyclerView = mock<RecyclerView>()
     val activity = mock<Activity>()

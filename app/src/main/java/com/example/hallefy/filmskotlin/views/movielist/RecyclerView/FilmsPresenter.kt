@@ -12,20 +12,16 @@ import javax.inject.Inject
 /**
  * Created by hallefy on 18/08/17.
  */
-
-
 class FilmsPresenter @Inject constructor(private val recyclerView: RecyclerView,
-                                         private val adapter : MyRecyclerAdapter): FilmsMVP.Presenter, Observer<MoviesResponse> {
+                                         private val adapter : MyRecyclerAdapter, private val moviesView : FilmsMVP.View): FilmsMVP.Presenter, Observer<MoviesResponse> {
 
     var page_num :Int = 1
     private var totalMovies = 0
     private var ultimoLimit = 0
 
-
     override fun onNext(response: MoviesResponse?) {
         initAdapter()
         page_num++
-
 
         if(response != null){
             totalMovies = response.movies!!.size
@@ -39,17 +35,13 @@ class FilmsPresenter @Inject constructor(private val recyclerView: RecyclerView,
 
             if(page_num <= 2){
 
-
-
                 adapter.setValuesAdapter(response.movies,response)
                 adapter.setRecyclerViewListener(recyclerView)
                 adapter.setLoaded()
-
                 recyclerView.adapter = adapter
 
                 //evento do scroll do recyclerView
                 loadMoreList()
-
             }else{
                 adapter.swap(response.movies)
             }
@@ -59,14 +51,12 @@ class FilmsPresenter @Inject constructor(private val recyclerView: RecyclerView,
 
     }
 
-
-    private fun initAdapter() {
+    fun initAdapter() {
         if (recyclerView.adapter == null){
             recyclerView.adapter = adapter
             adapter.setRecyclerViewListener(recyclerView)
         }
     }
-
 
     override fun requestFilms() {
         var interactor = FilmesInteractor()
@@ -77,15 +67,20 @@ class FilmsPresenter @Inject constructor(private val recyclerView: RecyclerView,
     }
 
     override fun onError(e: Throwable?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       error("500")
     }
 
     override fun onSubscribe(d: Disposable?) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    fun error(errorType : String) {
+        if(errorType == "500"){
+            moviesView.showErrorConnection()
+        }
+    }
 
-    private fun loadMoreList(){
+    private fun loadMoreList() {
 
         Log.d("loadMoreList","entrou na funcao loadMoreList")
 
@@ -107,5 +102,4 @@ class FilmsPresenter @Inject constructor(private val recyclerView: RecyclerView,
 
         })
     }
-
 }

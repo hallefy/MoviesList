@@ -29,5 +29,6 @@ interface FilmsMVP{
         fun verifyConnection() : Boolean
         fun getMoviesRecyclerView() : RecyclerView
         fun hideDialog()
+        fun showErrorConnection()
     }
 }
