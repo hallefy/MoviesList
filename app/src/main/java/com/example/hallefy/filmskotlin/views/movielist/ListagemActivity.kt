@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.example.hallefy.filmskotlin.NetworkAPI.models.Movie
 import com.example.hallefy.filmskotlin.R
 import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.FilmsMVP
 import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.FilmsPresenter
