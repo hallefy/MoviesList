@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.example.hallefy.filmskotlin.NetworkAPI.models.Movie
 import com.example.hallefy.filmskotlin.R
 import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.FilmsMVP
 import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.FilmsPresenter
@@ -53,11 +52,19 @@ class ListagemActivity : AppCompatActivity(), FilmsMVP.View {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+    }
+    
+    override fun onResume() {
+        super.onResume()
+    }
+
     override fun showErrorConnection() {
         AlertDialog.Builder(this).setTitle("Sem conexão com a internet")
                 .setMessage("Por favor checar sua conexão e tentar novamente!")
                 .setNeutralButton(R.string.btn_ok, DialogInterface.OnClickListener { dialog, which -> this.finish() })
-                .setIcon(android.R.drawable.ic_dialog_alert).show()
+                .show()
 
     }
 

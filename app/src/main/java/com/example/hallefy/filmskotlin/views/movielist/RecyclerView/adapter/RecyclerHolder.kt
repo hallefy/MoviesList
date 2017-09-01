@@ -30,6 +30,7 @@ class RecyclerHolder(view: View, internal var context: Context, val response: Mo
     var bundle : Bundle? = Bundle()
 
 
+
     fun bind(films: MoviesResponse, position : Int){
         title.text = films.movies!![position]!!.title +" - " + films.movies!![position]!!.voteAverage.toString()
         rate.text = "_________"

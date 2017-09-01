@@ -23,8 +23,6 @@ class ActivityDetalhes : AppCompatActivity(), DetailMVP.View {
                 .inject(this)
 
         presenter.requestDetail(getReceivedData())
-
-
     }
 
     override fun getReceivedData(): Int {
@@ -36,6 +34,5 @@ class ActivityDetalhes : AppCompatActivity(), DetailMVP.View {
 
         return id
     }
-
 
 }

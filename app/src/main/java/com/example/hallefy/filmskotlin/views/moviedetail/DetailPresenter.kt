@@ -45,14 +45,12 @@ class DetailPresenter @Inject constructor(private val interactor: DetailMVP.Inte
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-
     override fun requestDetail(id_movie : Int) {
         initComponents()
 
         progressBar!!.visibility = View.VISIBLE
         progressBar!!.requestFocus()
 
-        var interactor = DetailInteractor()
         interactor.getMovieDetail(id_movie, this)
     }
 
@@ -63,8 +61,5 @@ class DetailPresenter @Inject constructor(private val interactor: DetailMVP.Inte
         imageFilm = activity.findViewById(R.id.imgBannerFilm) as ImageView
         progressBar = activity.findViewById(R.id.progressBarDetail) as ProgressBar
 
-
     }
-
-
 }

@@ -8,19 +8,19 @@ import io.reactivex.Observer
  * Created by hallefy on 28/08/17.
  */
 
-interface DetailMVP{
+interface DetailMVP {
 
-    interface Interactor{
+    interface Interactor {
         fun getMovieDetail(id_movie: Int, observer: Observer<Movie>)
         fun cancelRequest()
     }
 
 
-    interface Presenter{
+    interface Presenter {
         fun requestDetail(id_movie: Int)
     }
 
-    interface View{
+    interface View {
         fun getReceivedData() : Int
     }
 

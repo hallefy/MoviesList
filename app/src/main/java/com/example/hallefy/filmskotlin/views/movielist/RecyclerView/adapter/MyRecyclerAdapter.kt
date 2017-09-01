@@ -61,6 +61,11 @@ class MyRecyclerAdapter(private val mContext: Context) : RecyclerView.Adapter<Re
 
     }
 
+
+    override fun getItemId(position: Int): Long {
+        return super.getItemId(position)
+    }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, i: Int) {
 
 
