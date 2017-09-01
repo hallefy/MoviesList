@@ -52,11 +52,19 @@ class ListagemActivity : AppCompatActivity(), FilmsMVP.View {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+    }
+    
+    override fun onResume() {
+        super.onResume()
+    }
+
     override fun showErrorConnection() {
         AlertDialog.Builder(this).setTitle("Sem conexão com a internet")
                 .setMessage("Por favor checar sua conexão e tentar novamente!")
                 .setNeutralButton(R.string.btn_ok, DialogInterface.OnClickListener { dialog, which -> this.finish() })
-                .setIcon(android.R.drawable.ic_dialog_alert).show()
+                .show()
 
     }
 

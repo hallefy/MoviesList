@@ -3,7 +3,6 @@ package com.example.hallefy.filmskotlin.MovieDetailTest
 import android.app.Activity
 import com.example.hallefy.filmskotlin.views.moviedetail.DetailInteractor
 import com.example.hallefy.filmskotlin.views.moviedetail.DetailPresenter
-import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.FilmsMVP
 import com.nhaarman.mockito_kotlin.mock
 import org.junit.Test
 import org.junit.runner.RunWith

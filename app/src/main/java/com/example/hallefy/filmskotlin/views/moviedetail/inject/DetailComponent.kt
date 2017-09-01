@@ -13,6 +13,6 @@ import javax.inject.Singleton
         modules = arrayOf(DetailModule::class)
 )
 
-interface DetailComponent{
+interface DetailComponent {
     fun inject(activity: ActivityDetalhes)
 }
