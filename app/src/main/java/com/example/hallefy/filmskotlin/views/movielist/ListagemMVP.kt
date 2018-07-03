@@ -8,7 +8,7 @@ import io.reactivex.Observer
 interface ListagemMVP{
 
     interface Interactor{
-        fun requestDados(page_num: Int, observer: Observer<MoviesResponse>)
+        fun requestDados(pageNum: Int, observer: Observer<MoviesResponse>)
         fun cancelRequest()
     }
 

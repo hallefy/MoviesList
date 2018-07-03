@@ -16,7 +16,12 @@ interface DetailMVP {
     }
 
     interface View {
+        fun hideProgressBar()
+        fun showProgressBar()
         fun getReceivedData() : Int
+        fun bind(movie: Movie)
+        fun showErrorConnection(message : String)
+        fun showConteudoLayout()
     }
 
 }

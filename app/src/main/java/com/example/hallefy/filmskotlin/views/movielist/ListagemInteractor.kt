@@ -11,11 +11,11 @@ class ListagemInteractor : ListagemMVP.Interactor {
 
     val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    override fun requestDados(page_num: Int, observer: Observer<MoviesResponse>){
+    override fun requestDados(pageNum: Int, observer: Observer<MoviesResponse>){
         val repository = SearchRepositoryProvider.provideSearchRepository()
 
         compositeDisposable.add(
-                repository.searchFilms(page_num)
+                repository.searchFilms(pageNum)
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
                         .subscribe ({

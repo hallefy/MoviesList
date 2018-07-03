@@ -3,6 +3,6 @@
     <string name="textview">TextView</string>
     <string name="btn_ok">Ok</string>
     <string name="todo">TODO</string>
-    <string name="msg_conection">Por favor checar sua conexão e tentar novamente!</string>
+    <string name="msg_conection">Verifique sua conexão e tente novamente</string>
     <string name="title_conection">Sem conexão com a internet</string>
 </resources>

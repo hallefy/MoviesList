@@ -11,7 +11,6 @@ class DetailInteractor : DetailMVP.Interactor{
 
     val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-
     override fun getMovieDetail(id_movie: Int, observer: Observer<Movie>) {
         val repository = SearchRepositoryProvider.provideSearchRepository()
 
@@ -22,7 +21,7 @@ class DetailInteractor : DetailMVP.Interactor{
                         .subscribe({
                             response -> observer.onNext(response)
                         }, { error ->
-                            error.printStackTrace()
+                            observer.onError(error)
                         })
         )
     }
@@ -30,5 +29,4 @@ class DetailInteractor : DetailMVP.Interactor{
     override fun cancelRequest() {
         compositeDisposable.clear()
     }
-
 }
