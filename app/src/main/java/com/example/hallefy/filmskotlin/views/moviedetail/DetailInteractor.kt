@@ -7,9 +7,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-/**
- * Created by hallefy on 28/08/17.
- */
 class DetailInteractor : DetailMVP.Interactor{
 
     val compositeDisposable: CompositeDisposable = CompositeDisposable()

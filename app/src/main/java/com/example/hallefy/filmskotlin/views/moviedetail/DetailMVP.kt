@@ -3,10 +3,6 @@ package com.example.hallefy.filmskotlin.views.moviedetail
 import com.example.hallefy.filmskotlin.network.models.Movie
 import io.reactivex.Observer
 
-/**
- * Created by hallefy on 28/08/17.
- */
-
 interface DetailMVP {
 
     interface Interactor {

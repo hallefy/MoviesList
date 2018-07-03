@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
 import com.example.hallefy.filmskotlin.R
 import com.example.hallefy.filmskotlin.injection.DaggerListComponent
@@ -24,7 +27,6 @@ class ListagemActivity : AppCompatActivity(), ListagemMVP.View {
     lateinit var moviesComponent : ListComponent
     @Inject lateinit var presenter : ListagemPresenter
     private var adapter : ListagemAdapter? = null
-    var pageNum : Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,11 +44,12 @@ class ListagemActivity : AppCompatActivity(), ListagemMVP.View {
     fun setUp() {
         initRecycler()
         request()
+        presenter.scrollListener(recycler_view)
     }
 
-    fun request() {
+    override fun request() {
         when (verifyConnection()) {
-            true -> presenter.requestFilms(pageNum)
+            true -> presenter.requestFilms()
             false -> showErrorConnection()
         }
     }
@@ -69,14 +72,17 @@ class ListagemActivity : AppCompatActivity(), ListagemMVP.View {
         }
     }
 
-    override fun addMovies(movie: List<Movie>) {
+    override fun progressBarStatus() : Boolean {
+        return progressBar.isVisible()
+    }
+
+    override fun addMovies(movie: ArrayList<Movie>) {
         if(adapter != null){
             adapter?.addMovie(movie)
         }else {
             adapter = ListagemAdapter(this, movie)
             recycler_view.adapter = adapter
         }
-        pageNum++
     }
 
     override fun showErrorConnection() {

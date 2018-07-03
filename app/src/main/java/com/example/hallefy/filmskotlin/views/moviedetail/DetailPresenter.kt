@@ -14,9 +14,6 @@ import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
-/**
- * Created by hallefy on 28/08/17.
- */
 class DetailPresenter @Inject constructor(private val interactor: DetailMVP.Interactor,
                                           private val activity: Activity): DetailMVP.Presenter,Observer<Movie>{
 
@@ -29,9 +26,10 @@ class DetailPresenter @Inject constructor(private val interactor: DetailMVP.Inte
     override fun onNext(response : Movie?) {
         progressBar!!.visibility = View.GONE
 
-        description!!.text = "Description: ${response?.overview}"
+
+        description!!.text = "Descrição: ${response?.overview}"
         imageFilm!!.loadUrl(Constants.IMG_URL + response?.backdropPath)
-        release!!.text = "Release data: ${response?.releaseDate}"
+        release!!.text = "Data de lançamento: ${response?.releaseDate}"
     }
 
     override fun onSubscribe(d: Disposable?) {}
@@ -52,7 +50,6 @@ class DetailPresenter @Inject constructor(private val interactor: DetailMVP.Inte
     }
 
     fun initComponents(){
-
         release = activity.findViewById(R.id.tvRelease) as TextView
         description = activity.findViewById(R.id.tvDescriptionFilm) as TextView
         imageFilm = activity.findViewById(R.id.imgBannerFilm) as ImageView
