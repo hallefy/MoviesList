@@ -1,3 +1,14 @@
-# filmsKotlin
+# Movies List
 
-This project was develop using Kotlin, MVP, Retrofit and Dagger 2 for study purpose.
+App to show movies list and movies details.
+
+## This Project was developed using: 
+
+1. Kotlin
+2. MVP
+3. Retrofit
+4. Dagger 2
+
+Api : <i> <a href= "https://www.themoviedb.org">The Movie DB </a></i>
+
+<a href="https://codeclimate.com/github/hallefy/MoviesList/maintainability"><img src="https://api.codeclimate.com/v1/badges/8e3b4c152fc490501390/maintainability" />
