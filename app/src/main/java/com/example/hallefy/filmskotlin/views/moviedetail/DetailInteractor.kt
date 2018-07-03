@@ -1,9 +1,8 @@
 package com.example.hallefy.filmskotlin.views.moviedetail
 
-import com.example.hallefy.filmskotlin.NetworkAPI.SearchRepositoryProvider
-import com.example.hallefy.filmskotlin.NetworkAPI.models.Movie
+import com.example.hallefy.filmskotlin.network.SearchRepositoryProvider
+import com.example.hallefy.filmskotlin.network.models.Movie
 import io.reactivex.Observer
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

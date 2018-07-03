@@ -1,4 +1,4 @@
-package com.example.hallefy.filmskotlin.NetworkAPI.models
+package com.example.hallefy.filmskotlin.network.models
 
 import com.google.gson.annotations.SerializedName
 import java.util.ArrayList
@@ -8,26 +8,26 @@ import java.util.ArrayList
  */
 
 class Movie(@SerializedName("poster_path")
-            var posterPath: String?,
+            var posterPath: String,
             @SerializedName("overview")
-            var overview: String?,
+            var overview: String,
             @SerializedName("release_date")
-            var releaseDate: String?,
+            var releaseDate: String,
             @SerializedName("id")
-            var id: Int?,
+            var id: Int,
             @SerializedName("original_title")
-            var originalTitle: String?,
+            var originalTitle: String,
             @SerializedName("title")
-            var title: String?,
+            var title: String,
             @SerializedName("backdrop_path")
-            var backdropPath: String?,
+            var backdropPath: String,
             @SerializedName("vote_average")
-            var voteAverage: Double?)
+            var voteAverage: Double)
 
 
 
 data class MoviesResponse (
         @SerializedName("results")
-        var movies : ArrayList<Movie?>? = null
+        var movies : ArrayList<Movie>
 )
 

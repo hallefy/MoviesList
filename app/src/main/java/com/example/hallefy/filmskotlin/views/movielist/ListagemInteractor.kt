@@ -1,19 +1,13 @@
-package com.example.hallefy.filmskotlin.views.movielist.RecyclerView
+package com.example.hallefy.filmskotlin.views.movielist
 
-import com.example.hallefy.filmskotlin.NetworkAPI.SearchRepositoryProvider
-import com.example.hallefy.filmskotlin.NetworkAPI.models.MoviesResponse
+import com.example.hallefy.filmskotlin.network.SearchRepositoryProvider
+import com.example.hallefy.filmskotlin.network.models.MoviesResponse
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-/**
- * Created by hallefy on 18/08/17.
- */
-
-
-
-class FilmesInteractor () : FilmsMVP.Interactor {
+class ListagemInteractor : ListagemMVP.Interactor {
 
     val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -27,13 +21,11 @@ class FilmesInteractor () : FilmsMVP.Interactor {
                         .subscribe ({
                             response ->
                             observer.onNext(response)
-
                         }, { error ->
                             error.printStackTrace()
                         })
         )
     }
-
 
     override fun cancelRequest(){
         compositeDisposable.clear()

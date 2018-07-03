@@ -1,75 +1,89 @@
-package com.example.hallefy.filmskotlin.views.movielist.movielist
+package com.example.hallefy.filmskotlin.views.movielist
 
 import android.content.Context
-import android.content.DialogInterface
-import android.graphics.Rect
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.example.hallefy.filmskotlin.R
-import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.FilmsMVP
-import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.FilmsPresenter
-import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.injection.DaggerMoviesComponent
-import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.injection.MoviesComponent
-import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.injection.MoviesModule
+import com.example.hallefy.filmskotlin.injection.DaggerListComponent
+import com.example.hallefy.filmskotlin.injection.ListComponent
+import com.example.hallefy.filmskotlin.injection.modules.MoviesModule
+import com.example.hallefy.filmskotlin.network.models.Movie
+import com.example.hallefy.filmskotlin.utils.gone
+import com.example.hallefy.filmskotlin.utils.isVisible
+import com.example.hallefy.filmskotlin.utils.visible
+import com.example.hallefy.filmskotlin.views.movielist.adapter.ListagemAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class ListagemActivity : AppCompatActivity(), FilmsMVP.View {
+class ListagemActivity : AppCompatActivity(), ListagemMVP.View {
 
-    @Inject lateinit var mFilmsPresenter : FilmsPresenter
-    private var moviesComponent : MoviesComponent? = null
+    lateinit var moviesComponent : ListComponent
+    @Inject lateinit var presenter : ListagemPresenter
+    private var adapter : ListagemAdapter? = null
+    var pageNum : Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        moviesComponent = DaggerListComponent
+                .builder()
+                .moviesModule(MoviesModule(this))
+                .build()
+        moviesComponent.inject(this)
+
+        setUp()
+    }
+
+    fun setUp() {
+        initRecycler()
+        request()
+    }
+
+    fun request() {
+        when (verifyConnection()) {
+            true -> presenter.requestFilms(pageNum)
+            false -> showErrorConnection()
+        }
+    }
+
+    override fun showProgressBar() {
+        progressBar.visible()
+    }
+
+    override fun hideProgressBar() {
+        if(progressBar.isVisible()){
+            progressBar.gone()
+        }
+    }
+
+    fun initRecycler() {
         recycler_view.apply {
             setHasFixedSize(true)
             val linearLayout = GridLayoutManager(context, 2)
             layoutManager = linearLayout
-            recycler_view.addItemDecoration(SpacesItemDecoration(resources.getDimensionPixelSize(R.dimen.default_padding)))
-        }
-
-        moviesComponent = DaggerMoviesComponent
-                .builder()
-                .moviesModule(MoviesModule(this,this,recycler_view))
-                .build()
-        moviesComponent!!.inject(this)
-
-        var presenter = FilmsPresenter(recycler_view, moviesComponent!!.provideAdapterMovies(),this)
-
-        if(verifyConnection()){
-            //if internet connection is ok
-            presenter.requestFilms()
-        }else{
-            //if not have internet connection
-            showErrorConnection()
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
-    
-    override fun onResume() {
-        super.onResume()
+    override fun addMovies(movie: List<Movie>) {
+        if(adapter != null){
+            adapter?.addMovie(movie)
+        }else {
+            adapter = ListagemAdapter(this, movie)
+            recycler_view.adapter = adapter
+        }
+        pageNum++
     }
 
     override fun showErrorConnection() {
-        AlertDialog.Builder(this).setTitle("Sem conexão com a internet")
-                .setMessage("Por favor checar sua conexão e tentar novamente!")
-                .setNeutralButton(R.string.btn_ok, DialogInterface.OnClickListener { dialog, which -> this.finish() })
+        AlertDialog.Builder(this).setTitle(getString(R.string.title_conection))
+                .setMessage(getString(R.string.msg_conection))
+                .setNeutralButton(R.string.btn_ok, { _, _ -> this.finish() })
                 .show()
-
-    }
-
-    override fun showMoreFilms() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun hideDialog() {
@@ -78,35 +92,9 @@ class ListagemActivity : AppCompatActivity(), FilmsMVP.View {
         }
     }
 
-    override fun getMoviesRecyclerView(): RecyclerView {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    private fun requestMovies(){
-
-    }
-
-    internal inner class SpacesItemDecoration(space: Int) : RecyclerView.ItemDecoration() {
-
-        private val halfSpace: Int = space / 2
-
-        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-
-            if (parent.paddingLeft != halfSpace) {
-                parent.setPadding(halfSpace, halfSpace, halfSpace, halfSpace)
-                parent.clipToPadding = false
-            }
-
-            outRect.top = halfSpace
-            outRect.bottom = halfSpace
-            outRect.left = halfSpace
-            outRect.right = halfSpace
-        }
-    }
-
     override fun verifyConnection(): Boolean {
-            val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager// 1
-            val networkInfo = connectivityManager.activeNetworkInfo // 2
-            return networkInfo != null && networkInfo.isConnected // 3
+            val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val networkInfo = connectivityManager.activeNetworkInfo
+            return networkInfo != null && networkInfo.isConnected
     }
 }

@@ -4,8 +4,8 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.hallefy.filmskotlin.R
-import com.example.hallefy.filmskotlin.views.moviedetail.inject.DaggerDetailComponent
-import com.example.hallefy.filmskotlin.views.moviedetail.inject.DetailModule
+import com.example.hallefy.filmskotlin.injection.DaggerDetailComponent
+import com.example.hallefy.filmskotlin.injection.modules.DetailModule
 import javax.inject.Inject
 
 class ActivityDetalhes : AppCompatActivity(), DetailMVP.View {
@@ -18,7 +18,7 @@ class ActivityDetalhes : AppCompatActivity(), DetailMVP.View {
         setContentView(R.layout.activity_detalhes)
 
         DaggerDetailComponent.builder()
-                .detailModule(DetailModule(this,this))
+                .detailModule(DetailModule(this, this))
                 .build()
                 .inject(this)
 

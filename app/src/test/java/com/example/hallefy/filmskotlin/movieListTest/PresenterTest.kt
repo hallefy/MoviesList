@@ -2,11 +2,11 @@ package com.example.hallefy.filmskotlin.movieListTest
 
 import android.app.Activity
 import android.support.v7.widget.RecyclerView
-import com.example.hallefy.filmskotlin.NetworkAPI.models.Movie
-import com.example.hallefy.filmskotlin.NetworkAPI.models.MoviesResponse
-import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.FilmsMVP
-import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.FilmsPresenter
-import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.adapter.MyRecyclerAdapter
+import com.example.hallefy.filmskotlin.network.models.Movie
+import com.example.hallefy.filmskotlin.network.models.MoviesResponse
+import com.example.hallefy.filmskotlin.views.movielist.ListagemMVP
+import com.example.hallefy.filmskotlin.views.movielist.ListagemPresenter
+import com.example.hallefy.filmskotlin.views.movielist.adapter.MyRecyclerAdapter
 import com.nhaarman.mockito_kotlin.mock
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -24,9 +24,9 @@ class PresenterTest {
 
     var recyclerView = mock<RecyclerView>()
     val activity = mock<Activity>()
-    val view = mock<FilmsMVP.View>()
+    val view = mock<ListagemMVP.View>()
     var adapter = MyRecyclerAdapter(activity)
-    val presenterMock = FilmsPresenter(recyclerView,adapter,view)
+    val presenterMock = ListagemPresenter(recyclerView, adapter, view)
 
     @Test
     fun requestMovies() {

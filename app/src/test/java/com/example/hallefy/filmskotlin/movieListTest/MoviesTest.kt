@@ -1,6 +1,6 @@
 package com.example.hallefy.filmskotlin.movieListTest
 
-import com.example.hallefy.filmskotlin.NetworkAPI.models.Movie
+import com.example.hallefy.filmskotlin.network.models.Movie
 import org.junit.Assert
 import org.junit.Before
 import org.hamcrest.CoreMatchers.`is`

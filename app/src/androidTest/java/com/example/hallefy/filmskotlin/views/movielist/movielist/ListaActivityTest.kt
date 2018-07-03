@@ -5,14 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso
-import android.support.test.espresso.ViewAssertion
-import android.support.test.espresso.action.ViewActions
 import android.support.test.espresso.contrib.RecyclerViewActions
 import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import com.example.hallefy.filmskotlin.R
-import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.adapter.RecyclerHolder
+import com.example.hallefy.filmskotlin.views.movielist.ListagemActivity
+import com.example.hallefy.filmskotlin.views.movielist.adapter.RecyclerHolder
 import org.junit.*
 import org.junit.runner.RunWith
 

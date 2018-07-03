@@ -1,6 +1,6 @@
 package com.example.hallefy.filmskotlin.movieListTest
 
-import com.example.hallefy.filmskotlin.views.movielist.RecyclerView.FilmsMVP
+import com.example.hallefy.filmskotlin.views.movielist.ListagemMVP
 import com.nhaarman.mockito_kotlin.mock
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -13,7 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class MoviesViewTest{
 
-    private val view = mock<FilmsMVP.View>()
+    private val view = mock<ListagemMVP.View>()
 
     @Test
     fun testingConnection() {

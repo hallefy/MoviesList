@@ -1,7 +1,6 @@
 package com.example.hallefy.filmskotlin.views.moviedetail
 
-import com.example.hallefy.filmskotlin.NetworkAPI.models.Movie
-import io.reactivex.Observable
+import com.example.hallefy.filmskotlin.network.models.Movie
 import io.reactivex.Observer
 
 /**

@@ -1,13 +1,15 @@
 package com.example.hallefy.filmskotlin.views.moviedetail
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import com.example.hallefy.filmskotlin.NetworkAPI.models.Movie
+import com.example.hallefy.filmskotlin.network.models.Movie
 import com.example.hallefy.filmskotlin.R
-import com.example.hallefy.filmskotlin.views.movielist.utils.loadUrl
+import com.example.hallefy.filmskotlin.utils.Constants
+import com.example.hallefy.filmskotlin.utils.loadUrl
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
@@ -23,26 +25,21 @@ class DetailPresenter @Inject constructor(private val interactor: DetailMVP.Inte
     var release : TextView? = null
     var progressBar : ProgressBar? = null
 
-
+    @SuppressLint("SetTextI18n")
     override fun onNext(response : Movie?) {
         progressBar!!.visibility = View.GONE
 
-        description!!.text = "Description: " + response!!.overview
-        imageFilm!!.loadUrl("https://image.tmdb.org/t/p/w500/"+response!!.backdropPath)
-        release!!.text = "Release data:" + response!!.releaseDate
+        description!!.text = "Description: ${response?.overview}"
+        imageFilm!!.loadUrl(Constants.IMG_URL + response?.backdropPath)
+        release!!.text = "Release data: ${response?.releaseDate}"
     }
 
-    override fun onSubscribe(d: Disposable?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun onSubscribe(d: Disposable?) {}
 
     override fun onComplete() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-
     }
 
     override fun onError(e: Throwable?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun requestDetail(id_movie : Int) {

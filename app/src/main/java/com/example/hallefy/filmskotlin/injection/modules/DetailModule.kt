@@ -1,4 +1,4 @@
-package com.example.hallefy.filmskotlin.views.moviedetail.inject
+package com.example.hallefy.filmskotlin.injection.modules
 
 import android.app.Activity
 import android.app.AlertDialog

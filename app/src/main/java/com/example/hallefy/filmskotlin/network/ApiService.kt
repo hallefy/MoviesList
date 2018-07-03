@@ -1,27 +1,26 @@
-package com.example.hallefy.filmskotlin.NetworkAPI
+package com.example.hallefy.filmskotlin.network
 
-import com.example.hallefy.filmskotlin.NetworkAPI.models.Movie
-import com.example.hallefy.filmskotlin.NetworkAPI.models.MoviesResponse
+import com.example.hallefy.filmskotlin.network.models.Movie
+import com.example.hallefy.filmskotlin.network.models.MoviesResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-
-/**
- * Created by hallefy on 18/08/17.
- */
-
 
 interface ApiService{
 
     @retrofit2.http.GET("discover/movie?api_key=")
     fun getMovies(@Query("api_key") apiKey: String,
                   @Query("language") language: String,
-                  @Query("page") page: String) : io.reactivex.Observable<MoviesResponse>
+                  @Query("page") page: String)
+            : Observable<MoviesResponse>
 
 
     @GET("movie/{id}")
-    fun getMovieDetail(@Path("id") id : Int,@Query("api_key") apiKey: String ,@Query("language") language : String) : Observable<Movie>
+    fun getMovieDetail(@Path("id") id : Int,
+                       @Query("api_key") apiKey: String ,
+                       @Query("language") language : String)
+            : Observable<Movie>
 
 
     companion object Factory {
