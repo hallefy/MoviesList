@@ -7,7 +7,8 @@ App to show movies list and movies details.
 1. Kotlin
 2. MVP
 3. Retrofit
-4. Dagger 2
+4. Dagger 
+5. RxJava
 
 Api : <i> <a href= "https://www.themoviedb.org">The Movie DB </a></i>
 
