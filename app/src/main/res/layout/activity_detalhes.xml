@@ -83,7 +83,7 @@
 
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/ivConnection"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_marginBottom="8dp"
@@ -110,7 +110,7 @@
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/imageView"
+            app:layout_constraintBottom_toTopOf="@+id/ivConnection"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
