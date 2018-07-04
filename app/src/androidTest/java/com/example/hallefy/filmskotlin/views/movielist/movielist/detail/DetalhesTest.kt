@@ -11,6 +11,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import android.content.Intent
 import com.example.hallefy.filmskotlin.views.movielist.movielist.pageobjects.DetalhesPageObject
+import com.example.hallefy.filmskotlin.views.movielist.movielist.sleep
 
 
 @RunWith(AndroidJUnit4::class)
@@ -53,9 +54,5 @@ class DetalhesTest {
         pageObjectDetalhe.descriptionIsVisible()
         pageObjectDetalhe.releaseIsVisible()
         sleep(2)
-    }
-
-    fun sleep(seconds : Long) {
-        Thread.sleep(seconds * 1000)
     }
 }

@@ -5,30 +5,31 @@ import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import com.example.hallefy.filmskotlin.R
+import com.example.hallefy.filmskotlin.views.movielist.movielist.isVisible
 
 object DetalhesPageObject {
 
     fun messageConnectionIsVisible() {
-        onView(withId(R.id.tvMessageConnection)).check(matches(isDisplayed()))
+        isVisible(R.id.tvMessageConnection)
     }
 
     fun imageErrorConnectionIsVisible() {
-        onView(withId(R.id.ivConnection)).check(matches(isDisplayed()))
+        isVisible(R.id.ivConnection)
     }
 
     fun layoutConteudoIsVisible() {
-        onView(withId(R.id.layoutConteudo)).check(matches(isDisplayed()))
+        isVisible(R.id.layoutConteudo)
     }
 
     fun bannerIsVisible() {
-        onView(withId(R.id.ivBanner)).check(matches(isDisplayed()))
+        isVisible(R.id.ivBanner)
     }
 
     fun descriptionIsVisible() {
-        onView(withId(R.id.tvDescription)).check(matches(isDisplayed()))
+        isVisible(R.id.tvDescription)
     }
 
     fun releaseIsVisible() {
-        onView(withId(R.id.tvRelease)).check(matches(isDisplayed()))
+        isVisible(R.id.tvRelease)
     }
 }
